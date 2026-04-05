@@ -1,0 +1,1265 @@
+{
+  "scenes": [
+    {
+      "id": "scene1",
+      "type": "Intro",
+      "durationInSeconds": 10.384,
+      "narration": "The mighty Roman Empire, once the undisputed ruler of the world, began to falter. What led to the fall of this colossal civilization?",
+      "wordTimestamps": [
+        {
+          "word": "The",
+          "start": 0.16,
+          "end": 0.32
+        },
+        {
+          "word": "mighty",
+          "start": 0.32,
+          "end": 0.58
+        },
+        {
+          "word": "Roman",
+          "start": 0.58,
+          "end": 0.9
+        },
+        {
+          "word": "Empire,",
+          "start": 0.9,
+          "end": 1.64
+        },
+        {
+          "word": "once",
+          "start": 1.64,
+          "end": 1.98
+        },
+        {
+          "word": "the",
+          "start": 1.98,
+          "end": 2.2
+        },
+        {
+          "word": "undisputed",
+          "start": 2.2,
+          "end": 2.84
+        },
+        {
+          "word": "ruler",
+          "start": 2.84,
+          "end": 3.12
+        },
+        {
+          "word": "of",
+          "start": 3.12,
+          "end": 3.32
+        },
+        {
+          "word": "the",
+          "start": 3.32,
+          "end": 3.44
+        },
+        {
+          "word": "world,",
+          "start": 3.44,
+          "end": 3.94
+        },
+        {
+          "word": "began",
+          "start": 3.94,
+          "end": 4.28
+        },
+        {
+          "word": "to",
+          "start": 4.28,
+          "end": 4.52
+        },
+        {
+          "word": "falter.",
+          "start": 4.52,
+          "end": 5.1
+        },
+        {
+          "word": "What",
+          "start": 5.94,
+          "end": 6.16
+        },
+        {
+          "word": "led",
+          "start": 6.16,
+          "end": 6.32
+        },
+        {
+          "word": "to",
+          "start": 6.32,
+          "end": 6.5
+        },
+        {
+          "word": "the",
+          "start": 6.5,
+          "end": 6.64
+        },
+        {
+          "word": "fall",
+          "start": 6.64,
+          "end": 6.88
+        },
+        {
+          "word": "of",
+          "start": 6.88,
+          "end": 7.02
+        },
+        {
+          "word": "this",
+          "start": 7.02,
+          "end": 7.18
+        },
+        {
+          "word": "colossal",
+          "start": 7.18,
+          "end": 7.7
+        },
+        {
+          "word": "civilization?",
+          "start": 7.7,
+          "end": 8.8
+        }
+      ],
+      "imageFile": "scene-1-image.jpg",
+      "audioFile": "scene-1-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene2",
+      "type": "Image",
+      "durationInSeconds": 11.104,
+      "narration": "Internal corruption and constant civil wars weakened Rome from within. Emperors rose and fell rapidly, leaving a trail of instability and bloodshed.",
+      "wordTimestamps": [
+        {
+          "word": "Internal",
+          "start": 0.2,
+          "end": 0.58
+        },
+        {
+          "word": "corruption",
+          "start": 0.58,
+          "end": 1.08
+        },
+        {
+          "word": "and",
+          "start": 1.08,
+          "end": 1.36
+        },
+        {
+          "word": "constant",
+          "start": 1.36,
+          "end": 1.82
+        },
+        {
+          "word": "civil",
+          "start": 1.82,
+          "end": 2.14
+        },
+        {
+          "word": "wars",
+          "start": 2.14,
+          "end": 2.46
+        },
+        {
+          "word": "weakened",
+          "start": 2.46,
+          "end": 2.86
+        },
+        {
+          "word": "Rome",
+          "start": 2.86,
+          "end": 3.14
+        },
+        {
+          "word": "from",
+          "start": 3.14,
+          "end": 3.4
+        },
+        {
+          "word": "within.",
+          "start": 3.4,
+          "end": 3.9
+        },
+        {
+          "word": "Emperors",
+          "start": 4.78,
+          "end": 5.2
+        },
+        {
+          "word": "rose",
+          "start": 5.2,
+          "end": 5.54
+        },
+        {
+          "word": "and",
+          "start": 5.54,
+          "end": 5.78
+        },
+        {
+          "word": "fell",
+          "start": 5.78,
+          "end": 6
+        },
+        {
+          "word": "rapidly,",
+          "start": 6,
+          "end": 6.88
+        },
+        {
+          "word": "leaving",
+          "start": 6.88,
+          "end": 7.1
+        },
+        {
+          "word": "a",
+          "start": 7.1,
+          "end": 7.3
+        },
+        {
+          "word": "trail",
+          "start": 7.3,
+          "end": 7.56
+        },
+        {
+          "word": "of",
+          "start": 7.56,
+          "end": 7.76
+        },
+        {
+          "word": "instability",
+          "start": 7.76,
+          "end": 8.12
+        },
+        {
+          "word": "and",
+          "start": 8.12,
+          "end": 8.62
+        },
+        {
+          "word": "bloodshed.",
+          "start": 8.62,
+          "end": 9.32
+        }
+      ],
+      "imageFile": "scene-2-image.jpg",
+      "audioFile": "scene-2-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene3",
+      "type": "Image",
+      "durationInSeconds": 11.608,
+      "narration": "Crippling inflation, heavy taxation, and a decline in trade drained the empire's resources. The common people suffered, and the economy teetered on the brink.",
+      "wordTimestamps": [
+        {
+          "word": "Crippling",
+          "start": 0.2,
+          "end": 0.54
+        },
+        {
+          "word": "inflation,",
+          "start": 0.54,
+          "end": 1.46
+        },
+        {
+          "word": "heavy",
+          "start": 1.46,
+          "end": 1.66
+        },
+        {
+          "word": "taxation,",
+          "start": 1.66,
+          "end": 2.14
+        },
+        {
+          "word": "and",
+          "start": 2.14,
+          "end": 2.76
+        },
+        {
+          "word": "a",
+          "start": 2.76,
+          "end": 2.88
+        },
+        {
+          "word": "decline",
+          "start": 2.88,
+          "end": 3.18
+        },
+        {
+          "word": "in",
+          "start": 3.18,
+          "end": 3.42
+        },
+        {
+          "word": "trade",
+          "start": 3.42,
+          "end": 3.66
+        },
+        {
+          "word": "drained",
+          "start": 3.66,
+          "end": 4.02
+        },
+        {
+          "word": "the",
+          "start": 4.02,
+          "end": 4.2
+        },
+        {
+          "word": "empire's",
+          "start": 4.2,
+          "end": 4.72
+        },
+        {
+          "word": "resources.",
+          "start": 4.72,
+          "end": 5.28
+        },
+        {
+          "word": "The",
+          "start": 6.4,
+          "end": 6.6
+        },
+        {
+          "word": "common",
+          "start": 6.6,
+          "end": 6.84
+        },
+        {
+          "word": "people",
+          "start": 6.84,
+          "end": 7.18
+        },
+        {
+          "word": "suffered,",
+          "start": 7.18,
+          "end": 7.86
+        },
+        {
+          "word": "and",
+          "start": 7.86,
+          "end": 8.12
+        },
+        {
+          "word": "the",
+          "start": 8.12,
+          "end": 8.22
+        },
+        {
+          "word": "economy",
+          "start": 8.22,
+          "end": 8.66
+        },
+        {
+          "word": "teetered",
+          "start": 8.66,
+          "end": 9.14
+        },
+        {
+          "word": "on",
+          "start": 9.14,
+          "end": 9.24
+        },
+        {
+          "word": "the",
+          "start": 9.24,
+          "end": 9.36
+        },
+        {
+          "word": "brink.",
+          "start": 9.36,
+          "end": 10.04
+        }
+      ],
+      "imageFile": "scene-3-image.jpg",
+      "audioFile": "scene-3-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene4",
+      "type": "Image",
+      "durationInSeconds": 10.696,
+      "narration": "From the north and east, waves of Germanic tribes, driven by their own pressures, began to breach Rome's defenses, their incursions growing bolder.",
+      "wordTimestamps": [
+        {
+          "word": "From",
+          "start": 0.22,
+          "end": 0.36
+        },
+        {
+          "word": "the",
+          "start": 0.36,
+          "end": 0.52
+        },
+        {
+          "word": "north",
+          "start": 0.52,
+          "end": 0.72
+        },
+        {
+          "word": "and",
+          "start": 0.72,
+          "end": 0.96
+        },
+        {
+          "word": "east,",
+          "start": 0.96,
+          "end": 1.44
+        },
+        {
+          "word": "waves",
+          "start": 1.44,
+          "end": 1.88
+        },
+        {
+          "word": "of",
+          "start": 1.88,
+          "end": 2.08
+        },
+        {
+          "word": "Germanic",
+          "start": 2.08,
+          "end": 2.52
+        },
+        {
+          "word": "tribes,",
+          "start": 2.52,
+          "end": 3.24
+        },
+        {
+          "word": "driven",
+          "start": 3.24,
+          "end": 3.56
+        },
+        {
+          "word": "by",
+          "start": 3.56,
+          "end": 3.84
+        },
+        {
+          "word": "their",
+          "start": 3.84,
+          "end": 4.02
+        },
+        {
+          "word": "own",
+          "start": 4.02,
+          "end": 4.24
+        },
+        {
+          "word": "pressures,",
+          "start": 4.24,
+          "end": 5.02
+        },
+        {
+          "word": "began",
+          "start": 5.18,
+          "end": 5.36
+        },
+        {
+          "word": "to",
+          "start": 5.36,
+          "end": 5.62
+        },
+        {
+          "word": "breach",
+          "start": 5.62,
+          "end": 5.9
+        },
+        {
+          "word": "Rome's",
+          "start": 5.9,
+          "end": 6.32
+        },
+        {
+          "word": "defenses,",
+          "start": 6.32,
+          "end": 7.1
+        },
+        {
+          "word": "their",
+          "start": 7.1,
+          "end": 7.4
+        },
+        {
+          "word": "incursions",
+          "start": 7.4,
+          "end": 7.96
+        },
+        {
+          "word": "growing",
+          "start": 7.96,
+          "end": 8.3
+        },
+        {
+          "word": "bolder.",
+          "start": 8.3,
+          "end": 8.88
+        }
+      ],
+      "imageFile": "scene-4-image.jpg",
+      "audioFile": "scene-4-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene5",
+      "type": "Image",
+      "durationInSeconds": 11.32,
+      "narration": "The empire's vast borders required an immense military. Maintaining such a large army placed an unbearable strain on Rome's already depleted coffers.",
+      "wordTimestamps": [
+        {
+          "word": "The",
+          "start": 0.16,
+          "end": 0.3
+        },
+        {
+          "word": "empire's",
+          "start": 0.3,
+          "end": 0.88
+        },
+        {
+          "word": "vast",
+          "start": 0.88,
+          "end": 1.2
+        },
+        {
+          "word": "borders",
+          "start": 1.2,
+          "end": 1.56
+        },
+        {
+          "word": "required",
+          "start": 1.56,
+          "end": 2.06
+        },
+        {
+          "word": "an",
+          "start": 2.06,
+          "end": 2.26
+        },
+        {
+          "word": "immense",
+          "start": 2.26,
+          "end": 2.56
+        },
+        {
+          "word": "military.",
+          "start": 2.56,
+          "end": 3.5
+        },
+        {
+          "word": "Maintaining",
+          "start": 4.28,
+          "end": 4.78
+        },
+        {
+          "word": "such",
+          "start": 4.78,
+          "end": 5.06
+        },
+        {
+          "word": "a",
+          "start": 5.06,
+          "end": 5.24
+        },
+        {
+          "word": "large",
+          "start": 5.24,
+          "end": 5.5
+        },
+        {
+          "word": "army",
+          "start": 5.5,
+          "end": 5.82
+        },
+        {
+          "word": "placed",
+          "start": 5.82,
+          "end": 6.18
+        },
+        {
+          "word": "an",
+          "start": 6.18,
+          "end": 6.36
+        },
+        {
+          "word": "unbearable",
+          "start": 6.36,
+          "end": 6.94
+        },
+        {
+          "word": "strain",
+          "start": 6.94,
+          "end": 7.28
+        },
+        {
+          "word": "on",
+          "start": 7.28,
+          "end": 7.52
+        },
+        {
+          "word": "Rome's",
+          "start": 7.52,
+          "end": 7.88
+        },
+        {
+          "word": "already",
+          "start": 7.88,
+          "end": 8.28
+        },
+        {
+          "word": "depleted",
+          "start": 8.28,
+          "end": 8.74
+        },
+        {
+          "word": "coffers.",
+          "start": 8.74,
+          "end": 9.52
+        }
+      ],
+      "imageFile": "scene-5-image.jpg",
+      "audioFile": "scene-5-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene6",
+      "type": "Image",
+      "durationInSeconds": 11.392,
+      "narration": "In 410 AD, the unthinkable happened. Alaric and his Visigoths sacked Rome, a symbolic blow that sent shockwaves across the known world.",
+      "wordTimestamps": [
+        {
+          "word": "In",
+          "start": 0.16,
+          "end": 0.36
+        },
+        {
+          "word": "410",
+          "start": 0.36,
+          "end": 0.98
+        },
+        {
+          "word": "AD,",
+          "start": 0.98,
+          "end": 1.7
+        },
+        {
+          "word": "the",
+          "start": 1.7,
+          "end": 1.82
+        },
+        {
+          "word": "unthinkable",
+          "start": 1.82,
+          "end": 2.42
+        },
+        {
+          "word": "happened.",
+          "start": 2.42,
+          "end": 3.18
+        },
+        {
+          "word": "Alaric",
+          "start": 3.92,
+          "end": 4.28
+        },
+        {
+          "word": "and",
+          "start": 4.28,
+          "end": 4.48
+        },
+        {
+          "word": "his",
+          "start": 4.48,
+          "end": 4.64
+        },
+        {
+          "word": "Visigoths",
+          "start": 4.64,
+          "end": 5.18
+        },
+        {
+          "word": "sacked",
+          "start": 5.18,
+          "end": 5.56
+        },
+        {
+          "word": "Rome,",
+          "start": 5.56,
+          "end": 6.12
+        },
+        {
+          "word": "a",
+          "start": 6.12,
+          "end": 6.28
+        },
+        {
+          "word": "symbolic",
+          "start": 6.28,
+          "end": 6.68
+        },
+        {
+          "word": "blow",
+          "start": 6.68,
+          "end": 7.08
+        },
+        {
+          "word": "that",
+          "start": 7.08,
+          "end": 7.34
+        },
+        {
+          "word": "sent",
+          "start": 7.34,
+          "end": 7.6
+        },
+        {
+          "word": "shockwaves",
+          "start": 7.6,
+          "end": 8.22
+        },
+        {
+          "word": "across",
+          "start": 8.22,
+          "end": 8.54
+        },
+        {
+          "word": "the",
+          "start": 8.54,
+          "end": 8.84
+        },
+        {
+          "word": "known",
+          "start": 8.84,
+          "end": 8.96
+        },
+        {
+          "word": "world.",
+          "start": 8.96,
+          "end": 9.6
+        }
+      ],
+      "imageFile": "scene-6-image.jpg",
+      "audioFile": "scene-6-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene7",
+      "type": "Image",
+      "durationInSeconds": 11.008,
+      "narration": "To manage its vast territories, the empire was divided. While the East endured, the West became increasingly vulnerable to external pressures.",
+      "wordTimestamps": [
+        {
+          "word": "To",
+          "start": 0.14,
+          "end": 0.3
+        },
+        {
+          "word": "manage",
+          "start": 0.3,
+          "end": 0.64
+        },
+        {
+          "word": "its",
+          "start": 0.64,
+          "end": 0.84
+        },
+        {
+          "word": "vast",
+          "start": 0.84,
+          "end": 1.18
+        },
+        {
+          "word": "territories,",
+          "start": 1.18,
+          "end": 2.08
+        },
+        {
+          "word": "the",
+          "start": 2.08,
+          "end": 2.32
+        },
+        {
+          "word": "empire",
+          "start": 2.32,
+          "end": 2.66
+        },
+        {
+          "word": "was",
+          "start": 2.66,
+          "end": 3.04
+        },
+        {
+          "word": "divided.",
+          "start": 3.04,
+          "end": 3.72
+        },
+        {
+          "word": "While",
+          "start": 4.48,
+          "end": 4.74
+        },
+        {
+          "word": "the",
+          "start": 4.74,
+          "end": 4.92
+        },
+        {
+          "word": "East",
+          "start": 4.92,
+          "end": 5.1
+        },
+        {
+          "word": "endured,",
+          "start": 5.1,
+          "end": 5.88
+        },
+        {
+          "word": "the",
+          "start": 5.88,
+          "end": 6.04
+        },
+        {
+          "word": "West",
+          "start": 6.04,
+          "end": 6.22
+        },
+        {
+          "word": "became",
+          "start": 6.22,
+          "end": 6.56
+        },
+        {
+          "word": "increasingly",
+          "start": 6.56,
+          "end": 7.16
+        },
+        {
+          "word": "vulnerable",
+          "start": 7.16,
+          "end": 7.7
+        },
+        {
+          "word": "to",
+          "start": 7.7,
+          "end": 8.02
+        },
+        {
+          "word": "external",
+          "start": 8.02,
+          "end": 8.44
+        },
+        {
+          "word": "pressures.",
+          "start": 8.44,
+          "end": 9.2
+        }
+      ],
+      "imageFile": "scene-7-image.jpg",
+      "audioFile": "scene-7-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene8",
+      "type": "Image",
+      "durationInSeconds": 11.176,
+      "narration": "In 476 AD, the last Western Roman Emperor was deposed. This date traditionally marks the final collapse of the Western Roman Empire.",
+      "wordTimestamps": [
+        {
+          "word": "In",
+          "start": 0.16,
+          "end": 0.34
+        },
+        {
+          "word": "476",
+          "start": 0.34,
+          "end": 1.4
+        },
+        {
+          "word": "AD,",
+          "start": 1.4,
+          "end": 2.2
+        },
+        {
+          "word": "the",
+          "start": 2.2,
+          "end": 2.32
+        },
+        {
+          "word": "last",
+          "start": 2.32,
+          "end": 2.58
+        },
+        {
+          "word": "Western",
+          "start": 2.58,
+          "end": 2.9
+        },
+        {
+          "word": "Roman",
+          "start": 2.9,
+          "end": 3.26
+        },
+        {
+          "word": "Emperor",
+          "start": 3.26,
+          "end": 3.56
+        },
+        {
+          "word": "was",
+          "start": 3.56,
+          "end": 3.88
+        },
+        {
+          "word": "deposed.",
+          "start": 3.88,
+          "end": 4.58
+        },
+        {
+          "word": "This",
+          "start": 5.46,
+          "end": 5.7
+        },
+        {
+          "word": "date",
+          "start": 5.7,
+          "end": 5.92
+        },
+        {
+          "word": "traditionally",
+          "start": 5.92,
+          "end": 6.42
+        },
+        {
+          "word": "marks",
+          "start": 6.42,
+          "end": 6.86
+        },
+        {
+          "word": "the",
+          "start": 6.86,
+          "end": 7.02
+        },
+        {
+          "word": "final",
+          "start": 7.02,
+          "end": 7.32
+        },
+        {
+          "word": "collapse",
+          "start": 7.32,
+          "end": 7.7
+        },
+        {
+          "word": "of",
+          "start": 7.7,
+          "end": 7.96
+        },
+        {
+          "word": "the",
+          "start": 7.96,
+          "end": 8.06
+        },
+        {
+          "word": "Western",
+          "start": 8.06,
+          "end": 8.34
+        },
+        {
+          "word": "Roman",
+          "start": 8.34,
+          "end": 8.7
+        },
+        {
+          "word": "Empire.",
+          "start": 8.7,
+          "end": 9.5
+        }
+      ],
+      "imageFile": "scene-8-image.jpg",
+      "audioFile": "scene-8-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene9",
+      "type": "Image",
+      "durationInSeconds": 11.848,
+      "narration": "Though the empire fell, its legacy endured. Roman law, language, architecture, and culture profoundly shaped the Western world for centuries to come.",
+      "wordTimestamps": [
+        {
+          "word": "Though",
+          "start": 0.2,
+          "end": 0.32
+        },
+        {
+          "word": "the",
+          "start": 0.32,
+          "end": 0.52
+        },
+        {
+          "word": "empire",
+          "start": 0.52,
+          "end": 0.88
+        },
+        {
+          "word": "fell,",
+          "start": 0.88,
+          "end": 1.56
+        },
+        {
+          "word": "its",
+          "start": 1.56,
+          "end": 1.82
+        },
+        {
+          "word": "legacy",
+          "start": 1.82,
+          "end": 2.24
+        },
+        {
+          "word": "endured.",
+          "start": 2.24,
+          "end": 3.16
+        },
+        {
+          "word": "Roman",
+          "start": 3.84,
+          "end": 4.16
+        },
+        {
+          "word": "law,",
+          "start": 4.16,
+          "end": 4.8
+        },
+        {
+          "word": "language,",
+          "start": 4.8,
+          "end": 5.5
+        },
+        {
+          "word": "architecture,",
+          "start": 5.5,
+          "end": 6.04
+        },
+        {
+          "word": "and",
+          "start": 6.04,
+          "end": 6.58
+        },
+        {
+          "word": "culture",
+          "start": 6.58,
+          "end": 6.92
+        },
+        {
+          "word": "profoundly",
+          "start": 6.92,
+          "end": 7.44
+        },
+        {
+          "word": "shaped",
+          "start": 7.44,
+          "end": 7.92
+        },
+        {
+          "word": "the",
+          "start": 7.92,
+          "end": 8.08
+        },
+        {
+          "word": "western",
+          "start": 8.08,
+          "end": 8.36
+        },
+        {
+          "word": "world",
+          "start": 8.36,
+          "end": 8.74
+        },
+        {
+          "word": "for",
+          "start": 8.74,
+          "end": 8.94
+        },
+        {
+          "word": "centuries",
+          "start": 8.94,
+          "end": 9.32
+        },
+        {
+          "word": "to",
+          "start": 9.32,
+          "end": 9.62
+        },
+        {
+          "word": "come.",
+          "start": 9.62,
+          "end": 10.2
+        }
+      ],
+      "imageFile": "scene-9-image.jpg",
+      "audioFile": "scene-9-audio.mp3",
+      "transition": "fade"
+    },
+    {
+      "id": "scene10",
+      "type": "EndCard",
+      "durationInSeconds": 13.096,
+      "narration": "The fall of Rome was not a single event, but a complex, drawn-out process. Its story continues to teach us about power, decline, and the enduring impact of civilization.",
+      "wordTimestamps": [
+        {
+          "word": "The",
+          "start": 0.16,
+          "end": 0.34
+        },
+        {
+          "word": "fall",
+          "start": 0.34,
+          "end": 0.56
+        },
+        {
+          "word": "of",
+          "start": 0.56,
+          "end": 0.76
+        },
+        {
+          "word": "Rome",
+          "start": 0.76,
+          "end": 0.94
+        },
+        {
+          "word": "was",
+          "start": 0.94,
+          "end": 1.18
+        },
+        {
+          "word": "not",
+          "start": 1.18,
+          "end": 1.36
+        },
+        {
+          "word": "a",
+          "start": 1.36,
+          "end": 1.52
+        },
+        {
+          "word": "single",
+          "start": 1.52,
+          "end": 1.8
+        },
+        {
+          "word": "event,",
+          "start": 1.8,
+          "end": 2.38
+        },
+        {
+          "word": "but",
+          "start": 2.38,
+          "end": 2.6
+        },
+        {
+          "word": "a",
+          "start": 2.6,
+          "end": 2.72
+        },
+        {
+          "word": "complex,",
+          "start": 2.72,
+          "end": 3.42
+        },
+        {
+          "word": "drawn-out",
+          "start": 3.42,
+          "end": 3.94
+        },
+        {
+          "word": "process.",
+          "start": 3.94,
+          "end": 4.94
+        },
+        {
+          "word": "Its",
+          "start": 5.62,
+          "end": 5.78
+        },
+        {
+          "word": "story",
+          "start": 5.78,
+          "end": 6.12
+        },
+        {
+          "word": "continues",
+          "start": 6.12,
+          "end": 6.64
+        },
+        {
+          "word": "to",
+          "start": 6.64,
+          "end": 6.86
+        },
+        {
+          "word": "teach",
+          "start": 6.86,
+          "end": 7.08
+        },
+        {
+          "word": "us",
+          "start": 7.08,
+          "end": 7.26
+        },
+        {
+          "word": "about",
+          "start": 7.26,
+          "end": 7.5
+        },
+        {
+          "word": "power,",
+          "start": 7.5,
+          "end": 8.18
+        },
+        {
+          "word": "decline,",
+          "start": 8.18,
+          "end": 8.52
+        },
+        {
+          "word": "and",
+          "start": 8.52,
+          "end": 9.14
+        },
+        {
+          "word": "the",
+          "start": 9.14,
+          "end": 9.26
+        },
+        {
+          "word": "enduring",
+          "start": 9.26,
+          "end": 9.6
+        },
+        {
+          "word": "impact",
+          "start": 9.6,
+          "end": 10.14
+        },
+        {
+          "word": "of",
+          "start": 10.14,
+          "end": 10.36
+        },
+        {
+          "word": "civilization.",
+          "start": 10.36,
+          "end": 10.84
+        }
+      ],
+      "imageFile": "scene-10-image.jpg",
+      "audioFile": "scene-10-audio.mp3",
+      "transition": "fade"
+    }
+  ],
+  "musicFile": "background.mp3"
+}

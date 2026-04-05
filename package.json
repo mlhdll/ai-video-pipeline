@@ -1,0 +1,17 @@
+{
+  "name": "ai-video-production-pipeline",
+  "version": "1.0.0",
+  "description": "Produce AI videos automatically through markdown and terminal prompts",
+  "main": "produce-video.js",
+  "scripts": {
+    "start": "node produce-video.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "form-data": "^4.0.5",
+    "fs-extra": "^11.2.0",
+    "msedge-tts": "^2.0.4",
+    "music-metadata": "^7.14.0"
+  }
+}

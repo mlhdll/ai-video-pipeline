@@ -1,0 +1,23 @@
+{
+    "name": "my-video",
+    "version": "1.0.0",
+    "description": "Remotion image slideshow renderer",
+    "scripts": {
+        "dev": "npx remotion studio src/index.ts",
+        "build": "npx remotion render src/index.ts MainVideo out/video.mp4 --concurrency=4",
+        "build:shorts": "npx remotion render src/index.ts ShortsVideo out/shorts.mp4 --concurrency=4",
+        "build:all": "npx remotion render src/index.ts MainVideo out/video.mp4 --concurrency=4 && npx remotion render src/index.ts ShortsVideo out/shorts.mp4 --concurrency=4",
+        "upgrade": "npx remotion upgrade"
+    },
+    "dependencies": {
+        "@remotion/cli": "4.0.237",
+        "react": "18.3.1",
+        "react-dom": "18.3.1",
+        "remotion": "4.0.237"
+    },
+    "devDependencies": {
+        "@types/react": "18.3.1",
+        "@types/react-dom": "18.3.1",
+        "typescript": "5.4.5"
+    }
+}

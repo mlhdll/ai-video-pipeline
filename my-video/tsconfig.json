@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "lib": [
+            "dom",
+            "esnext"
+        ],
+        "allowJs": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "strict": true,
+        "resolveJsonModule": true,
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist/",
+        "target": "es6",
+        "jsx": "react"
+    },
+    "include": [
+        "src/**/*"
+    ]
+}

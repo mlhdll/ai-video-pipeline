@@ -1,0 +1,44 @@
+# General
+.env
+.dev
+.vscode/
+.idea/
+*.log
+logs/
+tmp/
+
+# Python
+.venv/
+venv/
+ENV/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+
+# Project Specific - Private/Temporary
+youtube_session/
+youtube-metadata-*.txt
+run-daily.sh
+topics.txt
+done.txt
+generated-plans/
+
+# Media Assets (Auto-generated)
+my-video/public/assets/audio/*
+my-video/public/assets/images/*
+!my-video/public/assets/audio/.gitkeep
+!my-video/public/assets/images/.gitkeep
+out/
+*.mp4
+*.wav
+*.mp3
+*.jpg
+*.png
