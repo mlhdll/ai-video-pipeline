@@ -29,22 +29,33 @@ This project allows you to generate cinematic history (or any documentary) video
   - [Groq Cloud](https://console.groq.com/) (Whisper for subtitles)
 
 ### 2. Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/[YOUR_USERNAME]/[YOUR_REPO_NAME].git
-   cd [YOUR_REPO_NAME]
-   ```
-2. Install Node.js dependencies:
+
+#### Option A: Clone the repository (For Developers)
+```bash
+git clone https://github.com/mlhdll/ai-video-pipeline.git
+cd ai-video-pipeline
+```
+
+#### Option B: Download as ZIP (For Non-Git Users)
+1. Go to the [GitHub Repository Page](https://github.com/mlhdll/ai-video-pipeline).
+2. Click the green **Code** button and select **Download ZIP**.
+3. Extract the downloaded folder to your computer.
+4. Open your terminal (CMD or PowerShell) in that extracted folder.
+
+---
+
+#### 3. Install Dependencies
+1. Install Node.js dependencies:
    ```bash
    npm install
    cd my-video && npm install && cd ..
    ```
-3. Create your environment file:
+2. Create your environment file:
    ```bash
    cp .env.example .env
    # Fill in your API keys in .env
    ```
-4. Set up the Python virtual environment:
+3. Set up the Python virtual environment:
    Refer to the [Setup Guide](./SETUP.md) for detailed Python and Playwright installation steps.
 
 ### 3. Usage
