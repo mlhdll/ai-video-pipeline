@@ -1,112 +1,101 @@
 @echo off
 :: ─────────────────────────────────────────────────────────────────────────────
-:: run-all.bat  —  Full Automated Video Production + YouTube Upload
-::
+:: run-all.bat  —  Full Automated Video Production + Official YouTube API Upload
+:: 
 :: Usage:
 ::   run-all.bat "Your Topic" 20
 ::   run-all.bat "Your Topic" 20 shorts
-:: 
-:: First use (once):
-::   python youtube-login.py    (Logs in to YouTube and saves the session)
 :: ─────────────────────────────────────────────────────────────────────────────
 
 set PROMPT_TEXT=%~1
 set SCENE_COUNT=%~2
-set SHORTS=%~3
+set SHORTS_FLAG=%~3
+
+:: Default scene count if not provided
 if "%SCENE_COUNT%"=="" set SCENE_COUNT=20
 
 if "%PROMPT_TEXT%"=="" (
     echo.
-    echo Usage: run-all.bat "Topic" SceneCount [shorts]
-    echo Example: run-all.bat "The Fall of Rome" 20
+    echo Usage: run-all.bat "Your Topic" SceneCount [shorts]
+    echo Example: run-all.bat "The Mysteries of Ancient Egypt" 15
     echo.
     pause
     exit /b 1
 )
 
-:: Check if venv exists, if not, set it up
+:: Check if virtual environment exists
 if not exist .venv\Scripts\python.exe (
-    echo.
-    echo [ERROR] .venv not found. Setting it up now...
-    python -m venv .venv
-    .venv\Scripts\pip install playwright
-    .venv\Scripts\playwright install chromium
-    echo .venv setup complete.
-)
-if exist .venv\Scripts\python.exe (
-    .venv\Scripts\pip install python-dotenv >nul 2>&1
+    echo [ERROR] Python virtual environment (.venv) not found.
+    echo Please follow the instructions in SETUP.md to create it.
+    pause
+    exit /b 1
 )
 
 echo.
-echo ===========================================================
-echo  PHASE 1: Video Production Starting
-echo  Topic: %PROMPT_TEXT%
-echo  Scenes: %SCENE_COUNT%
-if /i "%SHORTS%"=="shorts" (
-    echo  Shorts: YES
-) else (
-    echo  Shorts: NO
-)
-echo ===========================================================
+echo =======================================================
+echo  PHASE 1: AI Content Generation Starting
+echo  Topic  : %PROMPT_TEXT%
+echo  Scenes : %SCENE_COUNT%
+echo =======================================================
 echo.
 
-:: 1. Planning + TTS + Image + Timestamp generation
-if /i "%SHORTS%"=="shorts" (
+:: 1. Generate Plan, TTS, and Images
+if /i "%SHORTS_FLAG%"=="shorts" (
     node produce-video.js --prompt "%PROMPT_TEXT%" --scenes %SCENE_COUNT% --shorts
 ) else (
     node produce-video.js --prompt "%PROMPT_TEXT%" --scenes %SCENE_COUNT%
 )
+
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [ERROR] produce-video.js failed. Cannot continue.
+    echo [ERROR] Content generation failed.
     pause
     exit /b 1
 )
 
-:: 2. Remotion render
+:: 2. Remotion Video Rendering
 echo.
-echo ===========================================================
-echo  PHASE 1b: Video Rendering (Remotion)
-echo ===========================================================
-echo.
+echo =======================================================
+echo  PHASE 2: Video Rendering (Remotion)
+echo =======================================================
 cd my-video
-if /i "%SHORTS%"=="shorts" (
+if /i "%SHORTS_FLAG%"=="shorts" (
     call npm run build:all
 ) else (
     call npm run build
 )
-if %ERRORLEVEL% neq 0 (
-    echo.
-    echo [ERROR] Remotion render failed. Cannot continue.
-    cd ..
-    pause
-    exit /b 1
-)
 cd ..
 
-echo.
-echo ===========================================================
-echo  PHASE 2: YouTube Upload Starting
-echo ===========================================================
-echo.
+if %ERRORLEVEL% neq 0 (
+    echo.
+    echo [ERROR] Video rendering failed.
+    pause
+    exit /b 1
+)
 
-:: 3. Automated YouTube upload
-if /i "%SHORTS%"=="shorts" (
-    .venv\Scripts\python youtube-upload.py --shorts
+:: 3. Official YouTube API Upload
+echo.
+echo =======================================================
+echo  PHASE 3: Official YouTube API Upload & Scheduling
+echo =======================================================
+
+:: We use the --schedule flag to automatically queue for 02:00 AM
+if /i "%SHORTS_FLAG%"=="shorts" (
+    .venv\Scripts\python youtube_api_upload.py --schedule --shorts
 ) else (
-    .venv\Scripts\python youtube-upload.py
+    .venv\Scripts\python youtube_api_upload.py --schedule
 )
 
 if %ERRORLEVEL% neq 0 (
     echo.
-    echo [ERROR] YouTube upload could not be completed.
+    echo [ERROR] YouTube upload failed.
     pause
     exit /b 1
 )
 
 echo.
-echo ===========================================================
-echo  COMPLETED! Video produced and uploaded to YouTube.
-echo ===========================================================
+echo =======================================================
+echo  🎉 SUCCESS: Video produced and scheduled for 02:00 AM!
+echo =======================================================
 echo.
 pause

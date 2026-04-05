@@ -39,3 +39,7 @@ out/
 *.mp3
 *.jpg
 *.png
+
+# YouTube API secrets
+client_secrets.json
+token.json

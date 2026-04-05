@@ -1,6 +1,6 @@
 # 🎬 Video Production Methodology
 
-This guide explains how the AI Video Engine works and how to customize your channel's unique look.
+This guide explains how the AI Video Engine works and how to customize your channel's unique look using the latest **Official YouTube API** flow.
 
 ---
 
@@ -28,6 +28,14 @@ Transform prompts into high-quality cinematic images.
 #### 🛠️ Customizing Your Visual Style
 By default, the engine uses a "Dramatic Historical" style. You can change this to match your channel's niche in `produce-video.js`:
 - **For Scenes**: Edit the `qualityTags` variable. Changing "cinematic, dramatic lighting" to "vibrant, anime style" or "minimalist, pastel colors" will completely change the video's mood.
+
+#### ⏰ Changing the Upload Time (Scheduling)
+By default, the engine schedules videos for **02:00 AM** (next available). To change this:
+1. Open `youtube_api_upload.py`.
+2. Locate the function `get_next_2am_iso()`.
+3. Change `hour=2` to your desired hour (e.g., `hour=18` for 6:00 PM).
+4. Save the file. All future uploads via `run-all.bat` will follow this new time.
+
 - **For Thumbnails**: Edit the `thumbPrompt` variable. Removing "historical" and adding your own keywords (e.g., "fast-paced, colorful") will help you stand out.
 
 #### 📏 Changing Photo Resolution & Manual Thumbnails
@@ -44,6 +52,11 @@ You can easily adjust the image size in `produce-video.js` inside the `generateI
 To achieve "Viral Style" dynamic word-level subtitles, we use Groq's Whisper API.
 - **Process**: Groq generates a JSON file with precise timestamps for **every single word**.
 - **Display**: Our Remotion engine then highlights words exactly as they are spoken.
+
+### 5. Official Upload Layer (YouTube Data API v3)
+Bypasses all browser-based security blocks (2FA, "Verify identity").
+- **Scheduling**: The system automatically schedules videos for **02:00 AM** to ensure a consistent daily post.
+- **Thumbnail**: Automatically generates and sets a cinematic thumbnail for every upload.
 
 ---
 

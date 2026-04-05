@@ -1,50 +1,39 @@
 # ⚡ Quick Start Guide
 
-Ready to create your first AI-generated video? Follow these 5 quick steps:
+Ready to create your first AI-generated video? Follow these 4 quick steps:
 
 ## 1. Installation
-Install all Node.js and Python dependencies as described in the [Setup Guide](./SETUP.md).
+Ensure Node.js and Python are installed. Install all dependencies as described in the [Setup Guide](./SETUP.md).
 
 ---
 
 ## 2. API Configuration
-1. Open `.env` and enter your API keys:
-   - `KREA_API_KEY`: ID:SECRET from Krea.ai
-   - `GEMINI_API_KEY`: from Google AI Studio
-   - `GROQ_API_KEY`: from Groq Console
-2. Set your chosen voice (e.g., `en-US-ChristopherNeural`).
+1. Open `.env` and enter your API keys for **Gemini**, **Krea**, and **Groq**.
+2. Download your `client_secrets.json` from Google Cloud Console.
 
 ---
 
-## 3. YouTube Session
-Run the login script once to authorize your channel:
-```bash
-.venv\Scripts\python youtube-login.py
+## 3. Official YouTube API Auth
+Run the auth script **once** to create your `token.json`:
+```powershell
+.\.venv\Scripts\python youtube_api_upload.py
 ```
+A browser window will open. Authorize your channel and once the terminal says "Success", you are ready!
 
 ---
 
-## 4. Run the Pipeline!
-Run the batch script with your desired topic and scene count:
+## 4. One-Click Production!
+Run the batch script with your topic and desired scene count:
 ```bash
-# General long-form video (16:9)
-run-all.bat "Rising from the Ashes" 25
-
-# Video + Shorts (9:16)
-run-all.bat "Rising from the Ashes" 25 shorts
+# Example: 20 scenes about Ancient Greece
+run-all.bat "Ancient Greece Mythology" 20
 ```
-
----
-
-## 5. What Happens Now?
-1. **Gemini** writes a detailed script & prompts.
-2. **Krea AI** generates cinematic images for each scene.
-3. **Microsoft Edge** generates high-quality narrator audio.
-4. **Groq Whisper** extracts word timings for perfect subtitles.
-5. **Remotion** renders the final .mp4 video.
-6. **Playwright** uploads everything to YouTube automatically.
+This script will:
+1. Generate the script, voices, and images.
+2. Render the final MP4.
+3. Upload and **schedule** the video for 02:00 AM automatically.
 
 ---
 
 ## 💡 Pro Tip
-Check `generated-plans/` to see the raw markdown scripts created by the AI. You can edit them manually and re-run the pipeline to refine your videos!
+Check `generated-plans/` to see the raw scripts. You can manually edit these markdown files if you want to refine the AI's output before rendering!

@@ -14,7 +14,7 @@ This project allows you to generate cinematic history (or any documentary) video
 - **Cinematic Images**: High-quality Z-Image generation via Krea AI API. (Resolution customizable!)
 - **Dynamic Subtitles**: Word-level synchronized subtitles via Groq Whisper.
 - **Remotion Render**: Programmatic video editing and rendering.
-- **Auto-Upload**: Fully automated YouTube Studio uploading (including metadata and thumbnails).
+- **Official YouTube API**: Secure, automated upload and scheduling.
 
 ---
 
@@ -30,36 +30,49 @@ This project allows you to generate cinematic history (or any documentary) video
 
 ### 2. Setup
 
-#### Option A: Clone the repository (For Developers)
+#### Step 1: Get the Code
+**Option A: Clone the repository (For Developers)**
 ```bash
 git clone https://github.com/mlhdll/ai-video-pipeline.git
 cd ai-video-pipeline
 ```
 
-#### Option B: Download as ZIP (For Non-Git Users)
+**Option B: Download as ZIP (For Non-Git Users)**
 1. Go to the [GitHub Repository Page](https://github.com/mlhdll/ai-video-pipeline).
 2. Click the green **Code** button and select **Download ZIP**.
-3. Extract the downloaded folder to your computer.
-4. Open your terminal (CMD or PowerShell) in that extracted folder.
+3. Extract the ZIP and open your terminal in that folder.
 
 ---
 
-#### 3. Install Dependencies
-1. Install Node.js dependencies:
+#### Step 2: Install Dependencies
+1. **Install Node.js packages**:
    ```bash
    npm install
    cd my-video && npm install && cd ..
    ```
-2. Create your environment file:
+2. **Setup Python Virtual Environment**:
+   ```bash
+   python -m venv .venv
+   .\.venv\Scripts\activate  # Windows
+   pip install -r requirements.txt
+   ```
+
+#### Step 3: Configure Environment
+1. Create your environment file:
    ```bash
    cp .env.example .env
    # Fill in your API keys in .env
    ```
-3. Set up the Python virtual environment:
-   Refer to the [Setup Guide](./SETUP.md) for detailed Python and Playwright installation steps.
+2. **YouTube API Setup**:
+   - Save your `client_secrets.json` to the root folder.
+   - Run once to authorize and create `token.json`:
+     ```bash
+     .\.venv\Scripts\python youtube_api_upload.py
+     ```
 
 ### 3. Usage
-Run the entire pipeline (Produce -> Render -> Upload) with one command:
+
+Run everything (Produce -> Render -> Upload) with one command:
 ```bash
 run-all.bat "The Secrets of Ancient Rome" 20
 ```
@@ -89,10 +102,10 @@ You can change the generation resolution in `produce-video.js` inside the `gener
 ---
 
 ## 📁 Repository Structure
-- `produce-video.js`: Core engine (Planning, TTS, Image generation, Resolution settings).
-- `my-video/`: Remotion project for visual rendering.
-- `youtube-upload.py`: Playwright-based automated YouTube uploader.
-- `youtube-login.py`: One-time session capture tool for YouTube.
+- `produce-video.js`: Core engine (Planning, TTS, Image generation).
+- `youtube_api_upload.py`: Official YouTube Data API uploader & scheduler.
+- `run-all.bat`: Main Windows batch script for automated execution.
+- `my-video/`: Remotion project for visual composition.
 
 ---
 

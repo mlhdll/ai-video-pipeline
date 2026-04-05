@@ -111,8 +111,8 @@ async function generateImage(prompt, index) {
     const submitUrl = `https://api.krea.ai/generate/image/${kreaModel}/${kreaModel}`;
     const submitRes = await axios.post(submitUrl, {
       prompt: fullPrompt,
-      width: 1024,
-      height: 576
+      width: 1280,
+      height: 720
     }, {
       headers: {
         'Authorization': `Bearer ${kreaKey}`,
@@ -224,8 +224,8 @@ Output only the prompt text.` }]
     const submitUrl = `https://api.krea.ai/generate/image/${kreaModel}/${kreaModel}`;
     const submitRes = await axios.post(submitUrl, {
       prompt: `${thumbPrompt}, photorealistic, 8K UHD`,
-      width: 1024,
-      height: 576
+      width: 1280,
+      height: 720
     }, {
       headers: {
         'Authorization': `Bearer ${kreaKey}`,
@@ -420,7 +420,7 @@ ${sceneTimingLines.join('\n')}
 
 #History #Documentary #VisualStorytelling
 
-TAGS: [15 comma-separated SEO tags relevant to your niche]`;
+TAGS: [15 comma-separated SEO tags]`;
 
   const apiKey = process.env.GEMINI_API_KEY;
   const model = process.env.GEMINI_TEXT_MODEL;
