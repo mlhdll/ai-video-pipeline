@@ -183,7 +183,7 @@ async function generateThumbnail(topic) {
 
   // ── Get a thumbnail-optimized prompt from Gemini ──────────────────────────
   // Customize the default style below (e.g., dramatic, intense, cinematic) to fit your niche.
-  let thumbPrompt = `${topic}, dramatic historical scene, intense cinemeatic lighting, powerful composition, eye-catching, YouTube thumbnail style, photorealistic, 8K`;
+  let thumbPrompt = `${topic}, dramatic historical scene, intense cinemeatic lighting, powerful composition, eye-catching, cinematic poster style, photorealistic, 8K, no text, no logos`;
 
   const geminiKey = process.env.GEMINI_API_KEY;
   if (geminiKey) {
@@ -199,6 +199,7 @@ Requirements:
 - Visually dramatic and emotionally intense
 - Cinematic lighting (golden hour, fire, storm, dramatic contrast)
 - Specific scene (not abstract) — show a key historical moment or character
+- **CRITICAL**: No text, no YouTube logos, no buttons, and no UI elements in the image. Pure visual description only.
 - Max 2 sentences, no hashtags, no explanations
 Output only the prompt text.` }]
         }],
@@ -309,6 +310,10 @@ async function generateMarkdownPlan(prompt, sceneCount) {
   const sysPrompt = `Write a ${sceneCount}-scene YouTube video script in markdown for: "${prompt}". Output ONLY raw markdown, no explanations. Use this EXACT format for each scene (scene 1 is intro type, last scene is endCard type, rest are image type):
 
 ${sceneTemplate}
+
+CRITICAL RULES:
+1. For the FINAL scene (endCard type), the **Video Prompt** MUST be clean, WITHOUT any text, buttons, YouTube logos, arrows, or UI elements. It should be purely visual.
+2. Ensure image prompts for other scenes also avoid text where possible.
 
 Write all ${sceneCount} scenes now:`;
 
