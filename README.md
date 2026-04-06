@@ -4,7 +4,7 @@
 This project allows you to generate cinematic history (or any documentary) videos with dynamic subtitles, AI-generated voices, high-quality images, and automated YouTube uploading using just a single prompt.
 
 > [!NOTE]
-> This repository is a generalized version for public use. Replace **[YOUR_CHANNEL_NAME]** and **[YOUR_BRAND_NAME]** placeholders with your own settings.
+> This repository is a generalized version for public use. Replace **[YOUR_CHANNEL_NAME]** , **[YOUR_BRAND_NAME]**, **TAGS** and **prompts in produce-video.js** placeholders with your own settings.
 
 ---
 
