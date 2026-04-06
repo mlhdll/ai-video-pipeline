@@ -4,7 +4,7 @@
 This project allows you to generate cinematic history (or any documentary) videos with dynamic subtitles, AI-generated voices, high-quality images, and automated YouTube uploading using just a single prompt.
 
 > [!NOTE]
-> This repository is a generalized version for public use. Replace **[YOUR_CHANNEL_NAME]** and **[BRANDING]** placeholders with your own settings.
+> This repository is a generalized version for public use. Replace **[YOUR_CHANNEL_NAME]** and **[YOUR_BRAND_NAME]** placeholders with your own settings.
 
 ---
 
@@ -15,6 +15,12 @@ This project allows you to generate cinematic history (or any documentary) video
 - **Dynamic Subtitles**: Word-level synchronized subtitles via Groq Whisper.
 - **Remotion Render**: Programmatic video editing and rendering.
 - **Official YouTube API**: Secure, automated upload and scheduling.
+
+## 📚 Documentation
+Detailed guides are located in the [docs/](./docs) folder:
+- **[Quick Start Guide](./docs/QUICK-START.md)**: Speedrun your first video.
+- **[Full Setup Guide](./docs/SETUP.md)**: Prerequisites, dependencies, and API configuration.
+- **[Video Production Guide](./docs/VIDEO-PRODUCTION-GUIDE.md)**: Deep dive into planning, styles, and customization.
 
 ---
 

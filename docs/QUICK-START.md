@@ -14,7 +14,7 @@ Ensure Node.js and Python are installed. Install all dependencies as described i
 ---
 
 ## 3. Official YouTube API Auth
-Run the auth script **once** to create your `token.json`:
+Run the auth script **once** from the project root to create your `token.json`:
 ```powershell
 .\.venv\Scripts\python youtube_api_upload.py
 ```
@@ -23,7 +23,7 @@ A browser window will open. Authorize your channel and once the terminal says "S
 ---
 
 ## 4. One-Click Production!
-Run the batch script with your topic and desired scene count:
+Run the batch script (from the root folder) with your topic and desired scene count:
 ```bash
 # Option A: Only Main Horizontal Video
 run-all.bat "Ancient Greece Mythology" 20
