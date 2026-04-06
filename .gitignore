@@ -26,6 +26,9 @@ package-lock.json
 # Project Specific - Private/Temporary
 youtube_session/
 youtube-metadata-*.txt
+run-daily.sh
+topics.txt
+done.txt
 generated-plans/
 
 # Media Assets (Auto-generated)

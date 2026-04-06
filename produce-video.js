@@ -104,62 +104,75 @@ async function generateImage(prompt, index) {
   const qualityTags = 'photorealistic, ultra-detailed, professional photography, dramatic cinematic lighting, 8K UHD';
   const fullPrompt = `${prompt}, ${qualityTags}`;
 
-  console.log(`🖼️  Generating image for scene ${index} via Krea AI (${kreaModel})...`);
+  const maxAttempts = 3;
+  let lastError = null;
 
-  try {
-    // 1. Submit the job
-    const submitUrl = `https://api.krea.ai/generate/image/${kreaModel}/${kreaModel}`;
-    const submitRes = await axios.post(submitUrl, {
-      prompt: fullPrompt,
-      width: 1280,
-      height: 720
-    }, {
-      headers: {
-        'Authorization': `Bearer ${kreaKey}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`\n⏳ Retry attempt ${attempt}/${maxAttempts} for scene ${index}...`);
+        await new Promise(r => setTimeout(r, 5000)); // Wait 5s before retry
       }
-    });
 
-    const jobId = submitRes.data.job_id;
-    if (!jobId) {
-      console.error('❌ Full Submission Response:', JSON.stringify(submitRes.data, null, 2));
-      throw new Error('Failed to get job_id from Krea AI');
-    }
-
-    // 2. Poll for the result
-    let imageUrl = null;
-    const maxRetries = 60; // 2 minutes total
-    for (let i = 0; i < maxRetries; i++) {
-      await new Promise(r => setTimeout(r, 2000)); // Poll every 2s
-      const statusRes = await axios.get(`https://api.krea.ai/jobs/${jobId}`, {
+      // 1. Submit the job
+      const submitUrl = `https://api.krea.ai/generate/image/${kreaModel}/${kreaModel}`;
+      const submitRes = await axios.post(submitUrl, {
+        prompt: fullPrompt,
+        width: 1280,
+        height: 720
+      }, {
         headers: {
           'Authorization': `Bearer ${kreaKey}`,
+          'Content-Type': 'application/json',
           'Accept': 'application/json'
         }
       });
 
-      const data = statusRes.data;
-      if (data.status === 'completed' && data.result && data.result.urls && data.result.urls[0]) {
-        imageUrl = data.result.urls[0];
-        break;
-      } else if (data.status === 'failed') {
-        throw new Error(`Krea job failed: ${data.error || 'Unknown error'}`);
+      const jobId = submitRes.data.job_id;
+      if (!jobId) {
+        throw new Error('Failed to get job_id from Krea AI');
       }
-      process.stdout.write('.');
+
+      // 2. Poll for the result
+      let imageUrl = null;
+      const pollingAttempts = 60; 
+      for (let i = 0; i < pollingAttempts; i++) {
+        await new Promise(r => setTimeout(r, 2000)); // Poll every 2s
+        const statusRes = await axios.get(`https://api.krea.ai/jobs/${jobId}`, {
+          headers: {
+            'Authorization': `Bearer ${kreaKey}`,
+            'Accept': 'application/json'
+          }
+        });
+
+        const data = statusRes.data;
+        if (data.status === 'completed' && data.result && data.result.urls && data.result.urls[0]) {
+          imageUrl = data.result.urls[0];
+          break;
+        } else if (data.status === 'failed') {
+          throw new Error(`Krea job failed: ${data.error || 'Unknown error'}`);
+        }
+        process.stdout.write('.');
+      }
+
+      if (!imageUrl) throw new Error('Krea generation timed out.');
+
+      // 3. Download the image
+      const imgRes = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+      await fs.writeFile(imagePath, imgRes.data);
+      console.log(`\n✅ Image saved: ${imagePath}`);
+      return imagePath;
+
+    } catch (err) {
+      lastError = err;
+      const errMsg = err.response?.data ? JSON.stringify(err.response.data) : err.message;
+      console.warn(`\n⚠️  Krea AI attempt ${attempt} failed for scene ${index}: ${errMsg}`);
+      
+      if (attempt === maxAttempts) {
+        console.error(`❌ All ${maxAttempts} Krea AI attempts failed.`);
+        throw lastError;
+      }
     }
-
-    if (!imageUrl) throw new Error('Krea generation timed out.');
-
-    // 3. Download the image
-    const imgRes = await axios.get(imageUrl, { responseType: 'arraybuffer' });
-    await fs.writeFile(imagePath, imgRes.data);
-    console.log(`\n✅ Image saved: ${imagePath}`);
-    return imagePath;
-
-  } catch (err) {
-    console.error(`❌ Krea AI failure for scene ${index}:`, err.response?.data || err.message);
-    throw err;
   }
 }
 
@@ -187,14 +200,21 @@ async function generateThumbnail(topic) {
 
   const geminiKey = process.env.GEMINI_API_KEY;
   if (geminiKey) {
-    try {
-      const model = process.env.GEMINI_TEXT_MODEL;
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiKey}`;
-      const res = await axios.post(url, {
-        contents: [{
-          parts: [{
-            text:
-              `Write ONE image generation prompt for a YouTube thumbnail about: "${topic}".
+    const maxAttempts = 3;
+    for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+      try {
+        if (attempt > 1) {
+          console.log(`\n⏳ Gemini thumbnail prompt attempt ${attempt}/${maxAttempts}...`);
+          await new Promise(r => setTimeout(r, 5000));
+        }
+
+        const model = process.env.GEMINI_TEXT_MODEL;
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${geminiKey}`;
+        const res = await axios.post(url, {
+          contents: [{
+            parts: [{
+              text:
+                `Write ONE image generation prompt for a YouTube thumbnail about: "${topic}".
 Requirements:
 - Visually dramatic and emotionally intense
 - Cinematic lighting (golden hour, fire, storm, dramatic contrast)
@@ -202,17 +222,22 @@ Requirements:
 - **CRITICAL**: No text, no YouTube logos, no buttons, and no UI elements in the image. Pure visual description only.
 - Max 2 sentences, no hashtags, no explanations
 Output only the prompt text.` }]
-        }],
-        generationConfig: { temperature: 0.8 }
-      }, { headers: { 'Content-Type': 'application/json' }, timeout: 30000 });
+          }],
+          generationConfig: { temperature: 0.8 }
+        }, { headers: { 'Content-Type': 'application/json' }, timeout: 30000 });
 
-      const text = res.data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
-      if (text && text.length > 20) {
-        thumbPrompt = text;
-        console.log(`🖼️  Thumbnail prompt: ${thumbPrompt.slice(0, 80)}...`);
+        const text = res.data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
+        if (text && text.length > 20) {
+          thumbPrompt = text;
+          console.log(`🖼️  Thumbnail prompt: ${thumbPrompt.slice(0, 80)}...`);
+        }
+        break; // Success! Exit retry loop
+      } catch (err) {
+        console.warn(`⚠️ Thumbnail prompt attempt ${attempt} failed: ${err.message}`);
+        if (attempt === maxAttempts) {
+          console.warn(`⚠️ All Gemini thumbnail prompt attempts failed, using fallback.`);
+        }
       }
-    } catch (err) {
-      console.warn(`⚠️ Thumbnail prompt via Gemini failed, using fallback.`);
     }
   }
 
@@ -301,7 +326,7 @@ async function getAudioDuration(filepath) {
 async function generateMarkdownPlan(prompt, sceneCount) {
   console.log(`\n🤖 Generating ${sceneCount}-scene plan for: "${prompt}"`);
 
-  const sceneTemplate = `### Scene N: Title (15s)
+  const sceneTemplate = `### Scene N: Title
 - **Type:** TYPE
 - **Video Prompt:** "8K cinematic image description"
 - **Voiceover:** "30-35 word narration"
@@ -325,33 +350,50 @@ Write all ${sceneCount} scenes now:`;
   const model = process.env.GEMINI_TEXT_MODEL;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-  try {
-    const response = await axios.post(url, {
-      contents: [{ parts: [{ text: sysPrompt }] }],
-      generationConfig: { temperature: 0.7 }
-    }, {
-      headers: { 'Content-Type': 'application/json' },
-      timeout: 120000
-    });
+  const maxAttempts = 3;
+  let lastError = null;
 
-    let text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text) {
-      text = JSON.stringify(response.data);
-    }
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`\n⏳ Gemini plan generation attempt ${attempt}/${maxAttempts}...`);
+        await new Promise(r => setTimeout(r, 5000)); // Wait 5s before retry
+      }
 
-    const slug = prompt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-    const filename = `plan-${slug}-${sceneCount}scenes.md`;
-    await fs.ensureDir('generated-plans');
-    const filepath = path.join('generated-plans', filename);
-    await fs.writeFile(filepath, text, 'utf-8');
-    console.log(`✅ Plan saved to ${filepath}`);
-    return filepath;
-  } catch (error) {
-    if (error.response?.data) {
-      console.error('❌ Google API Error:', JSON.stringify(error.response.data, null, 2));
+      const response = await axios.post(url, {
+        contents: [{ parts: [{ text: sysPrompt }] }],
+        generationConfig: { temperature: 0.7 }
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 120000
+      });
+
+      let text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text) {
+        text = JSON.stringify(response.data);
+      }
+
+      const slug = prompt.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+      const filename = `plan-${slug}-${sceneCount}scenes.md`;
+      await fs.ensureDir('generated-plans');
+      const filepath = path.join('generated-plans', filename);
+      await fs.writeFile(filepath, text, 'utf-8');
+      console.log(`✅ Plan saved to ${filepath}`);
+      return filepath;
+
+    } catch (error) {
+      lastError = error;
+      const errMsg = error.response?.data ? JSON.stringify(error.response.data) : error.message;
+      console.warn(`\n⚠️  Gemini plan attempt ${attempt} failed: ${errMsg}`);
+      
+      if (attempt === maxAttempts) {
+        if (error.response?.data) {
+          console.error('❌ Final Google API Error:', JSON.stringify(error.response.data, null, 2));
+        }
+        console.error('❌ Failed to generate plan after all attempts:', error.message);
+        process.exit(1);
+      }
     }
-    console.error('❌ Failed to generate plan:', error.message);
-    process.exit(1);
   }
 }
 
@@ -434,33 +476,47 @@ TAGS: [15 comma-separated SEO tags]`;
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-  try {
-    const response = await axios.post(url, {
-      contents: [{ parts: [{ text: metaPrompt }] }],
-      generationConfig: { temperature: 0.7 }
-    }, {
-      headers: { 'Content-Type': 'application/json' },
-      timeout: 90000
-    });
+  const maxAttempts = 3;
+  let lastError = null;
 
-    let text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text || text.length < 50) {
-      console.warn(`⚠️ Gemini returned short/empty metadata. Using fallback.`);
-      text = buildFallbackMetadata(topic, totalMin, sceneTimingLines);
-    }
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`\n⏳ Gemini metadata generation attempt ${attempt}/${maxAttempts}...`);
+        await new Promise(r => setTimeout(r, 5000));
+      }
 
-    const filename = `youtube-metadata-${outputSlug}.txt`;
-    await fs.writeFile(filename, text, 'utf-8');
-    console.log(`✅ YouTube metadata saved: ${filename}`);
-    return filename;
-  } catch (err) {
-    if (err.response?.data) {
-      console.error('❌ Google API Error:', JSON.stringify(err.response.data, null, 2));
+      const response = await axios.post(url, {
+        contents: [{ parts: [{ text: metaPrompt }] }],
+        generationConfig: { temperature: 0.7 }
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 90000
+      });
+
+      let text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text || text.length < 50) {
+        console.warn(`⚠️ Gemini returned short/empty metadata. Using fallback.`);
+        text = buildFallbackMetadata(topic, totalMin, sceneTimingLines);
+      }
+
+      const filename = `youtube-metadata-${outputSlug}.txt`;
+      await fs.writeFile(filename, text, 'utf-8');
+      console.log(`✅ YouTube metadata saved: ${filename}`);
+      return filename;
+
+    } catch (err) {
+      lastError = err;
+      const errMsg = err.response?.data ? JSON.stringify(err.response.data) : err.message;
+      console.warn(`\n⚠️  YouTube metadata attempt ${attempt} failed: ${errMsg}`);
+      
+      if (attempt === maxAttempts) {
+        console.warn(`⚠️ All Gemini metadata attempts failed, using fallback.`);
+        const filename = `youtube-metadata-${outputSlug}.txt`;
+        await fs.writeFile(filename, buildFallbackMetadata(topic, totalMin, sceneTimingLines), 'utf-8');
+        return filename;
+      }
     }
-    console.warn(`⚠️ Could not generate YouTube metadata: ${err.message}`);
-    const filename = `youtube-metadata-${outputSlug}.txt`;
-    await fs.writeFile(filename, buildFallbackMetadata(topic, totalMin, sceneTimingLines), 'utf-8');
-    return filename;
   }
 }
 
@@ -511,30 +567,47 @@ TAGS: [10 comma-separated tags — include: Shorts, Short, history, documentary]
 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-  try {
-    const response = await axios.post(url, {
-      contents: [{ parts: [{ text: shortsPrompt }] }],
-      generationConfig: { temperature: 0.7 }
-    }, {
-      headers: { 'Content-Type': 'application/json' },
-      timeout: 60000
-    });
+  const maxAttempts = 3;
+  let lastError = null;
 
-    let text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
-    if (!text || text.length < 30) {
-      console.warn(`⚠️ Gemini returned empty Shorts metadata. Using fallback.`);
-      text = buildFallbackShortsMetadata(topic);
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+    try {
+      if (attempt > 1) {
+        console.log(`\n⏳ Gemini Shorts metadata attempt ${attempt}/${maxAttempts}...`);
+        await new Promise(r => setTimeout(r, 5000));
+      }
+
+      const response = await axios.post(url, {
+        contents: [{ parts: [{ text: shortsPrompt }] }],
+        generationConfig: { temperature: 0.7 }
+      }, {
+        headers: { 'Content-Type': 'application/json' },
+        timeout: 60000
+      });
+
+      let text = response.data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (!text || text.length < 30) {
+        console.warn(`⚠️ Gemini returned empty Shorts metadata. Using fallback.`);
+        text = buildFallbackShortsMetadata(topic);
+      }
+
+      const filename = `youtube-metadata-shorts-${outputSlug}.txt`;
+      await fs.writeFile(filename, text, 'utf-8');
+      console.log(`✅ Shorts metadata saved: ${filename}`);
+      return filename;
+
+    } catch (err) {
+      lastError = err;
+      const errMsg = err.response?.data ? JSON.stringify(err.response.data) : err.message;
+      console.warn(`\n⚠️  Shorts metadata attempt ${attempt} failed: ${errMsg}`);
+      
+      if (attempt === maxAttempts) {
+        console.warn(`⚠️ All Gemini Shorts metadata attempts failed, using fallback.`);
+        const filename = `youtube-metadata-shorts-${outputSlug}.txt`;
+        await fs.writeFile(filename, buildFallbackShortsMetadata(topic), 'utf-8');
+        return filename;
+      }
     }
-
-    const filename = `youtube-metadata-shorts-${outputSlug}.txt`;
-    await fs.writeFile(filename, text, 'utf-8');
-    console.log(`✅ Shorts metadata saved: ${filename}`);
-    return filename;
-  } catch (err) {
-    console.warn(`⚠️ Shorts metadata generation failed: ${err.message}`);
-    const filename = `youtube-metadata-shorts-${outputSlug}.txt`;
-    await fs.writeFile(filename, buildFallbackShortsMetadata(topic), 'utf-8');
-    return filename;
   }
 }
 
@@ -757,4 +830,7 @@ async function main() {
   console.log();
 }
 
-main().catch(console.error);
+main().catch(err => {
+  console.error('\n❌ CRITICAL FAILURE:', err.message || err);
+  process.exit(1);
+});

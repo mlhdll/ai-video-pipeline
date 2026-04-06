@@ -72,13 +72,22 @@ cd ai-video-pipeline
 
 ### 3. Usage
 
-Run everything (Produce -> Render -> Upload) with one command:
+Run the batch script with your topic and desired scene count:
 ```bash
-run-all.bat "The Secrets of Ancient Rome" 20
+# Only Main Video
+run-all.bat "Ancient Greece Mythology" 20
+
+# Main Video + Shorts (Sequential Upload)
+run-all.bat "Ancient Greece Mythology" 20 shorts
 ```
-- `"The Secrets of Ancient Rome"`: Your video topic.
-- `20`: Number of scenes (more = longer video).
-- `shorts`: (Optional) Add this to generate 9:16 Shorts along with the main video.
+This script will:
+1. Generate the script, voices, and images.
+2. Render the final MP4(s).
+3. Upload and **schedule** them for 02:00 AM automatically.
+
+- `"Ancient Greece Mythology"`: Your video topic.
+- `20`: Number of scenes.
+- `shorts`: (Optional) Add this to generate and upload **BOTH** the main video and the Shorts version.
 
 ---
 

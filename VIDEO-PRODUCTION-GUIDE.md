@@ -63,14 +63,14 @@ Bypasses all browser-based security blocks (2FA, "Verify identity").
 ## 📽️ Video Styles & Ratios
 
 ### Main Horizontal Video (16:9)
-- Perfectly timed for 8+ minute documentaries.
+- **Default Mode**: Used when running `run-all.bat "Topic" 20`.
 - Dynamic subtitles centered on the bottom.
 - Cinematic image transitions (Fades & Zooms).
 
 ### Social Shorts (9:16)
-- Automatically derived from your main video plan.
-- Centers and crops horizontal images to 9:16 automatically.
-- High-intensity pacing (~55s-60s).
+- **Double Mode**: Activated by adding the `shorts` flag: `run-all.bat "Topic" 20 shorts`.
+- When this flag is used, the system produces **BOTH** the main video and the vertical (9:16) Short version.
+- Both videos are uploaded and scheduled sequentially to your official YouTube API.
 - **CTA**: Automatically adds a "Watch Full Story ↓" button to drive traffic to your main video.
 
 ---

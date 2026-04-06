@@ -25,13 +25,16 @@ A browser window will open. Authorize your channel and once the terminal says "S
 ## 4. One-Click Production!
 Run the batch script with your topic and desired scene count:
 ```bash
-# Example: 20 scenes about Ancient Greece
+# Option A: Only Main Horizontal Video
 run-all.bat "Ancient Greece Mythology" 20
+
+# Option B: Main Video + Social Shorts (Double Production & Upload)
+run-all.bat "Ancient Greece Mythology" 20 shorts
 ```
 This script will:
 1. Generate the script, voices, and images.
-2. Render the final MP4.
-3. Upload and **schedule** the video for 02:00 AM automatically.
+2. Render the final MP4 file(s).
+3. Upload and **schedule** them for 02:00 AM automatically.
 
 ---
 

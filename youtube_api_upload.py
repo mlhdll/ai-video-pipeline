@@ -133,10 +133,10 @@ def get_latest_metadata(is_shorts=False):
 def get_next_2am_iso():
     """Calculates the next occurrence of 02:00 AM local time in UTC ISO format."""
     now = datetime.now()
-    # Target 02:00:00 today
-    scheduled_time = now.replace(hour=2, minute=0, second=0, microsecond=0)
+    # Target 02:00:00 today (Using 23:00 UTC as requested for Turkey 02:00)
+    scheduled_time = now.replace(hour=23, minute=0, second=0, microsecond=0)
     
-    # If 02:00 has already passed today, schedule for tomorrow
+    # If already past scheduled time, move to next day
     if now >= scheduled_time:
         scheduled_time += timedelta(days=1)
     
@@ -146,37 +146,63 @@ def get_next_2am_iso():
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--video", help="Path to video file")
-    parser.add_argument("--shorts", action="store_true", help="Upload shorts.mp4 instead")
+    parser.add_argument("--shorts", action="store_true", help="Upload BOTH Main Video + Shorts")
     parser.add_argument("--privacy", default="public", choices=["public", "private", "unlisted"])
     parser.add_argument("--schedule", action="store_true", help="Schedule for next 02:00 AM local time")
     args = parser.parse_args()
 
-    # Determine files
-    video_file = VIDEO_OUT_DIR / ("shorts.mp4" if args.shorts else "video.mp4")
-    if args.video: video_file = Path(args.video)
-    
-    if not video_file.is_file():
-        print(f"❌ Video file not found: {video_file}")
-        return 1
-
-    meta_file = get_latest_metadata(args.shorts)
-    if not meta_file:
-        print("❌ Metadata file not found (make sure production script ran successfully).")
-        return 1
-    
-    meta = parse_metadata(meta_file)
     youtube = authenticate()
-    
-    # Schedule logic
     schedule_time = get_next_2am_iso() if args.schedule else None
 
-    # 1. Upload Video
-    video_id = upload_video(youtube, video_file, meta, args.privacy, schedule_time)
+    # 📋 Determine files to upload based on flags
+    uploads = []
+    if args.shorts:
+        # Dual upload: Main Video + Shorts
+        uploads.append({"path": VIDEO_OUT_DIR / "video.mp4", "is_shorts": False})
+        uploads.append({"path": VIDEO_OUT_DIR / "shorts.mp4", "is_shorts": True})
+    else:
+        # Single upload: Main Video only (default)
+        video_file = Path(args.video) if args.video else VIDEO_OUT_DIR / "video.mp4"
+        uploads.append({"path": video_file, "is_shorts": False})
+
+    if not uploads:
+        print("❌ No video files designated for upload.")
+        return 1
+
+    main_video_id = None
     
-    # 2. Upload Thumbnail (Main video only or if thumbnail exists)
-    thumb_path = VIDEO_OUT_DIR / "thumbnail.jpg"
-    if thumb_path.is_file() and not args.shorts:
-        set_thumbnail(youtube, video_id, thumb_path)
+    for item in uploads:
+        video_path = item["path"]
+        is_shorts = item["is_shorts"]
+
+        if not video_path.is_file():
+            print(f"⚠️ Skipping missing file: {video_path}")
+            continue
+
+        meta_file = get_latest_metadata(is_shorts)
+        if not meta_file:
+            print(f"❌ Metadata file not found for {'Shorts' if is_shorts else 'Main Video'}.")
+            return 1
+        
+        meta = parse_metadata(meta_file)
+        
+        # 🔗 REPLACE {MAIN_VIDEO_URL} if we just uploaded it in this run
+        if is_shorts and main_video_id and "{MAIN_VIDEO_URL}" in meta["description"]:
+            main_url = f"https://www.youtube.com/watch?v={main_video_id}"
+            print(f"🔗 Replacing {{MAIN_VIDEO_URL}} in Shorts with: {main_url}")
+            meta["description"] = meta["description"].replace("{MAIN_VIDEO_URL}", main_url)
+
+        # 1. Upload Video
+        video_id = upload_video(youtube, video_path, meta, args.privacy, schedule_time)
+        
+        if video_id:
+            if not is_shorts:
+                main_video_id = video_id
+        
+        # 2. Upload Thumbnail (Main video only)
+        thumb_path = VIDEO_OUT_DIR / "thumbnail.jpg"
+        if thumb_path.is_file() and not is_shorts:
+            set_thumbnail(youtube, video_id, thumb_path)
 
     return 0
 

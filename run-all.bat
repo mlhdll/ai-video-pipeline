@@ -39,39 +39,39 @@ echo  Scenes : %SCENE_COUNT%
 echo =======================================================
 echo.
 
-:: 1. Generate Plan, TTS, and Images
-if /i "%SHORTS_FLAG%"=="shorts" (
+:: --- Phase 1: Production ---
+echo.
+echo [1/3] Producing video content...
+if "%SHORTS_FLAG%"=="shorts" (
+    echo Mode: Main Video + Shorts
     node produce-video.js --prompt "%PROMPT_TEXT%" --scenes %SCENE_COUNT% --shorts
 ) else (
+    echo Mode: Main Video Only
     node produce-video.js --prompt "%PROMPT_TEXT%" --scenes %SCENE_COUNT%
 )
-
 if %ERRORLEVEL% neq 0 (
-    echo.
-    echo [ERROR] Content generation failed.
+    echo ERROR: Production failed.
     pause
-    exit /b 1
+    exit /b %ERRORLEVEL%
 )
 
-:: 2. Remotion Video Rendering
+:: --- Phase 2: Rendering ---
 echo.
-echo =======================================================
-echo  PHASE 2: Video Rendering (Remotion)
-echo =======================================================
+echo [2/3] Rendering with Remotion...
 cd my-video
-if /i "%SHORTS_FLAG%"=="shorts" (
+if "%SHORTS_FLAG%"=="shorts" (
     call npm run build:all
 ) else (
     call npm run build
 )
+if %ERRORLEVEL% neq 0 (
+    echo ERROR: Rendering failed.
+    cd ..
+    pause
+    exit /b %ERRORLEVEL%
+)
 cd ..
 
-if %ERRORLEVEL% neq 0 (
-    echo.
-    echo [ERROR] Video rendering failed.
-    pause
-    exit /b 1
-)
 
 :: 3. Official YouTube API Upload
 echo.
